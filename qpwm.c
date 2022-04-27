@@ -101,11 +101,12 @@ void notify_destroy(XEvent *e) {
 }
 
 void notify_enter(XEvent *e) {
-  while (XCheckTypedEvent(d, EnterNotify, e))
-    ;
+  while (XCheckTypedEvent(d, EnterNotify, e));
 
-    for
-      win if (c->w == e->xcrossing.window) win_focus(c);
+  for (client *t = 0, *c = list; c && t != list->prev; t = c, c = c->next) {
+    if (c->w == e->xcrossing.window)
+        win_focus(c);
+  }
 }
 
 void notify_motion(XEvent *e) {
